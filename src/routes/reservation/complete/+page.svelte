@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { checkAuth } from '$lib/stores/auth.js';
-	import { formatKoreanDate } from '../../../../../shared/utils/dateUtils.js';
+	import { formatKoreanDate } from '$lib/utils/dateUtils.js';
 
 	// 예약 정보 상태
 	let reservationData = null;

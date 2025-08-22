@@ -12,7 +12,7 @@
 	import StepIndicator from '$lib/components/StepIndicator.svelte';
 	import DurationSelector from '$lib/components/DurationSelector.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
-	import FeedbackManager from '../../../../shared/components/FeedbackManager.svelte';
+	import FeedbackManager from '$lib/components/FeedbackManager.svelte';
 	import { 
 		reservationState, 
 		stepNavigation, 
@@ -23,11 +23,11 @@
 		updateReservationData 
 	} from '$lib/stores/reservation.js';
 	import { userAPI } from '$lib/services/api.js';
-	import { formatDateForAPI } from '../../../../shared/services/apiBase.js';
+	import { formatDateForAPI } from '$lib/services/api.js';
 	import { RESERVATION_STEPS, DEFAULT_MESSAGES, PLACEHOLDERS } from '$lib/constants/reservationConstants.js';
-	import { formatKoreanDate, calculateDateRange } from '../../../../shared/utils/dateUtils.js';
+	import { formatKoreanDate, calculateDateRange } from '$lib/utils/dateUtils.js';
 	import { formatPhoneNumber, formatPassword, validateReservationInfo, VALIDATION_CONSTANTS } from '$lib/utils/validationUtils.js';
-	import { handleError, safeAsync, retryAsync } from '../../../../shared/utils/errorUtils.js';
+	import { handleError, safeAsync, retryAsync } from '$lib/utils/errorUtils.js';
 
 	// === 상수 정의 ===
 	const STEPS = RESERVATION_STEPS;
