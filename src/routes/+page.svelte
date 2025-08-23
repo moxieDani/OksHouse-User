@@ -3,7 +3,10 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import PrivacyConsent from '$lib/components/PrivacyConsent.svelte';
-	import { isAuthenticated, checkAuth, logout } from '$lib/stores/auth.js';
+	import { checkAuth, logout } from '$lib/stores/auth.js';
+	
+	// Base path for GitHub Pages
+	const basePath = browser && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	
 	// SvelteKit automatically provides these props - declare them to avoid warnings
 	export let data = {};
@@ -16,7 +19,7 @@
 		if (browser) {
 			const authStatus = checkAuth();
 			if (!authStatus) {
-				goto('/login');
+				goto(`${basePath}/login`);
 			}
 		}
 	});
@@ -27,7 +30,7 @@
 
 	function handlePrivacyConsent() {
 		showPrivacyModal = false;
-		goto('/reservation');
+		goto(`${basePath}/reservation`);
 	}
 
 	function handlePrivacyDecline() {
@@ -36,7 +39,7 @@
 
 	function handleLogout() {
 		logout();
-		goto('/login');
+		goto(`${basePath}/login`);
 	}
 </script>
 
@@ -74,7 +77,7 @@
 				<span class="arrow" aria-hidden="true">→</span>
 			</button>
 			
-			<a href="/manage" class="menu-btn modify" role="button" aria-label="예약 확인하기">
+			<a href="{basePath}/manage" class="menu-btn modify" role="button" aria-label="예약 확인하기">
 				<span class="emoji" aria-hidden="true">📝</span>
 				<div class="text">
 					<div class="main-text">예약 확인·변경하기</div>

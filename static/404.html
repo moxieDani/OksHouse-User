@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ok's House</title>
+    <script type="text/javascript">
+        // GitHub Pages SPA redirect hack for repository pages
+        // Handles base path '/OksHouse-User'
+        var pathSegmentsToKeep = 1; // Keep '/OksHouse-User' segment
+        
+        var l = window.location;
+        var pathArray = l.pathname.split('/').filter(function(segment) {
+            return segment !== '';
+        });
+        
+        // If we have at least the repository name segment
+        if (pathArray.length > pathSegmentsToKeep) {
+            var basePath = '/' + pathArray.slice(0, pathSegmentsToKeep).join('/');
+            var routePath = pathArray.slice(pathSegmentsToKeep).join('/');
+            
+            l.replace(
+                l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+                basePath + '/?/' + routePath.replace(/&/g, '~and~') +
+                (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+                l.hash
+            );
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

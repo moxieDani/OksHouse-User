@@ -1,6 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	
+	// Base path for GitHub Pages
+	const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { checkAuth } from '$lib/stores/auth.js';
@@ -102,7 +105,7 @@
 		if (browser) {
 			const authStatus = checkAuth();
 			if (!authStatus) {
-				goto('/login');
+				goto(`${basePath}/login`);
 				return;
 			}
 		}
@@ -332,12 +335,12 @@
 					password: modificationData.userInfo.password
 				}));
 			}
-			goto('/manage#step2');
+			goto(`${basePath}/manage#step2`);
 			return;
 		}
 		
 		if (!isModificationMode && currentStep === 1) {
-			goto('/');
+			goto(`${basePath}/`);
 			return;
 		}
 		
@@ -395,7 +398,7 @@
 					data: encodeURIComponent(JSON.stringify(completionData)),
 					modification: 'true'
 				});
-				goto(`/reservation/complete?${params.toString()}`);
+				goto(`${basePath}/reservation/complete?${params.toString()}`);
 			} catch (error) {
 				handleError(error, '예약 변경', showAlert);
 			}
@@ -454,7 +457,7 @@
 				data: encodeURIComponent(JSON.stringify(completionData)),
 				modification: 'false'
 			});
-			goto(`/reservation/complete?${params.toString()}`);
+			goto(`${basePath}/reservation/complete?${params.toString()}`);
 		} catch (error) {
 			handleError(error, '예약 생성', showAlert);
 		}

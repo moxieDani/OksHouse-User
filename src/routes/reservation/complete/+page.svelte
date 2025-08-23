@@ -1,6 +1,9 @@
 <script>
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	
+	// Base path for GitHub Pages
+	const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { checkAuth } from '$lib/stores/auth.js';
@@ -15,7 +18,7 @@
 		if (browser) {
 			const authStatus = checkAuth();
 			if (!authStatus) {
-				goto('/login');
+				goto(`${basePath}/login`);
 				return;
 			}
 		}
@@ -31,16 +34,16 @@
 				isModification = modParam === 'true';
 			} catch (error) {
 				console.error('예약 정보 파싱 오류:', error);
-				goto('/');
+				goto(`${basePath}/`);
 			}
 		} else {
 			// 예약 정보가 없으면 홈으로 리다이렉트
-			goto('/');
+			goto(`${basePath}/`);
 		}
 	});
 
 	function handleGoHome() {
-		goto('/');
+		goto(`${basePath}/`);
 	}
 
 	function handleViewReservations() {
@@ -52,7 +55,7 @@
 				password: reservationData.guestPassword
 			}));
 		}
-		goto('/manage#step2');
+		goto(`${basePath}/manage#step2`);
 	}
 
 	// 예약 정보 포맷팅

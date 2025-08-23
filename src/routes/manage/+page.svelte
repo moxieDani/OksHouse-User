@@ -1,6 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	
+	// Base path for GitHub Pages
+	const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	import { browser } from '$app/environment';
 	import { checkAuth } from '$lib/stores/auth.js';
 	
@@ -62,7 +65,7 @@
 		if (browser) {
 			const authStatus = checkAuth();
 			if (!authStatus) {
-				goto('/login');
+				goto(`${basePath}/login`);
 				return;
 			}
 		}
@@ -141,7 +144,7 @@
 
 	function handlePrev() {
 		if (currentStep === 1) {
-			goto('/');
+			goto(`${basePath}/`);
 		} else {
 			currentStep = currentStep - 1;
 			if (currentStep === 1) {
@@ -313,7 +316,7 @@
 		if (browser) {
 			sessionStorage.setItem('modificationData', JSON.stringify(modificationData));
 		}
-		goto('/reservation');
+		goto(`${basePath}/reservation`);
 	}
 
 	async function cancelSelectedReservation() {

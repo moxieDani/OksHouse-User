@@ -3,6 +3,9 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	
+	// Base path for GitHub Pages
+	const basePath = typeof window !== 'undefined' && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
+	
 	// SvelteKit automatically provides these props to layout components - declare them to avoid warnings
 	export let data = {};
 	export let params = {};
@@ -11,11 +14,11 @@
 	 * 홈 페이지로 이동하는 함수
 	 */
 	function goHome() {
-		goto('/');
+		goto(`${basePath}/`);
 	}
 	
 	// 현재 페이지가 홈 페이지이거나 로그인 페이지인지 확인 (홈 버튼 숨김)
-	$: isHomePage = $page.url.pathname === '/' || $page.url.pathname === '/login';
+	$: isHomePage = $page.url.pathname === `${basePath}/` || $page.url.pathname === `${basePath}/login` || $page.url.pathname === '/' || $page.url.pathname === '/login';
 	
 	// 현재 페이지에 따른 홈 버튼 텍스트 결정
 	$: homeButtonText = (() => {

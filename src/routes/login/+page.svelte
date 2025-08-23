@@ -1,7 +1,10 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	
+	// Base path for GitHub Pages
+	const basePath = browser && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	import { login, checkAuth } from '$lib/stores/auth.js';
 
 	let password = '';
@@ -15,7 +18,7 @@
 		if (browser) {
 			const authStatus = checkAuth();
 			if (authStatus) {
-				goto('/');
+				goto(`${basePath}/`);
 			}
 		}
 	});
@@ -59,7 +62,7 @@
 			if (response.ok && data.success) {
 				// 로그인 성공 - 스토어에 저장
 				login();
-				goto('/');
+				goto(`${basePath}/`);
 			} else {
 				attemptCount++;
 				const remainingAttempts = maxAttempts - attemptCount;
