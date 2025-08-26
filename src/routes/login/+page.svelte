@@ -1,11 +1,12 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { browser } '$app/environment';
 	import { onMount } from 'svelte';
 	
 	// Base path for GitHub Pages
 	const basePath = browser && window.location.hostname.includes('github.io') ? '/OksHouse-User' : '';
 	import { login, checkAuth } from '$lib/stores/auth.js';
+	import { API_BASE_URL } from '$lib/services/api.js';
 
 	let password = '';
 	let attemptCount = 0;
@@ -49,7 +50,7 @@
 		errorMessage = '';
 
 		try {
-			const response = await fetch('/api/v1/user/auth/login', {
+			const response = await fetch(`${API_BASE_URL}/user/auth/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
