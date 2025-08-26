@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { browser } '$app/environment';
+	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	
 	// Base path for GitHub Pages
